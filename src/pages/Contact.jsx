@@ -23,7 +23,7 @@ const SOCIALS = [
   {
     name: "Instagram",
     handle: "@everybraincountswithozy",
-    href: "https://instagram.com/everybraincountswithozy",
+    href: "https://www.instagram.com/everybraincountswithozy?igsh=MXZ6YmowdXl5aGM4cA==",
     color: "#e07b1a",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-5 h-5">
@@ -35,8 +35,8 @@ const SOCIALS = [
   },
   {
     name: "TikTok",
-    handle: "@everybraincountswithozy",
-    href: "https://tiktok.com/@everybraincountswithozy",
+    handle: "@every.brain.count",
+    href: "https://www.tiktok.com/@every.brain.count?_r=1&_t=ZS-969AK7m8Zm4",
     color: "#3a7d0a",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-5 h-5">
@@ -53,7 +53,7 @@ const SOCIALS = [
   {
     name: "Facebook",
     handle: "Renowned Child Initiative",
-    href: "https://facebook.com/renownedchildinitiative",
+    href: "https://www.facebook.com/RCIniNg",
     color: "#3a7d0a",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-5 h-5">
@@ -70,7 +70,7 @@ const SOCIALS = [
   {
     name: "LinkedIn",
     handle: "Ozioma Ike",
-    href: "https://linkedin.com/in/ozioma-ike",
+    href: "https://www.linkedin.com/in/ozioma-ike-45ab2b379",
     color: "#e07b1a",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-5 h-5">
@@ -87,7 +87,7 @@ const SOCIALS = [
   {
     name: "YouTube",
     handle: "@everybraincountswithozy",
-    href: "https://youtube.com/@everybraincountswithozy",
+    href: "https://youtube.com/@everybraincountswithozy?si=KaCtnnBEK6LfS26f",
     color: "#3a7d0a",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-5 h-5">
@@ -540,12 +540,13 @@ function ContactCTA() {
 
 export default function ContactPage() {
   return (
-    <>
-    <ContactHero />
-    <EmailSection />
-    <SocialsSection />
-    <DomainStrip />
-    <ContactCTA />
+    
+      <>
+      <ContactHero />
+      <EmailSection />
+      <SocialsSection />
+      <DomainStrip />
+      <ContactCTA />
     </>
   );
 }
