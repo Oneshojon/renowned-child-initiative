@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
+import { useSanity }          from "../hooks/useSanity";
+import { SOCIAL_LINKS_QUERY } from "../lib/queries";
 
 // ─────────────────────────────────────────────────────────────────
 // CTA BANNER
@@ -127,16 +129,59 @@ const FOOTER_LINKS = [
   {
     heading: "Services",
     links: [
-      { label: "Early Intervention",   to: "/services" },
-      { label: "Inclusive Education",  to: "/services" },
+      { label: "Early Intervention",     to: "/services" },
+      { label: "Inclusive Education",    to: "/services" },
       { label: "Neurodiversity Support", to: "/services" },
-      { label: "Family Empowerment",   to: "/services" },
+      { label: "Family Empowerment",     to: "/services" },
     ],
   },
 ];
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { data: socialLinks } = useSanity(SOCIAL_LINKS_QUERY);
+
+  const SOCIAL_ICONS = {
+    instagram: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+      </svg>
+    ),
+    tiktok: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" strokeWidth="1.8"
+              strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    youtube: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M10 9.5L15 12L10 14.5V9.5Z" fill="currentColor"/>
+      </svg>
+    ),
+    linkedin: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M7 10v7M7 7v.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" stroke="currentColor" strokeWidth="1.8"
+              strokeLinecap="round"/>
+      </svg>
+    ),
+    facebook: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M13 21v-8h2.5l.5-3H13V8.5C13 7.7 13.3 7 14.5 7H16V4.5S15 4 13.5 4C11 4 10 5.5 10 7.5V10H7.5v3H10v8"
+              stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    twitter: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 4l16 16M4 20L20 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+      </svg>
+    ),
+  };
 
   return (
     <footer role="contentinfo" className="bg-[#111d06] text-white">
@@ -147,7 +192,6 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-2 flex flex-col gap-5">
-            {/* Logo + wordmark */}
             <Link
               to="/"
               aria-label="Renowned Child Initiative — Home"
@@ -178,21 +222,43 @@ export function Footer() {
               specialised support, inclusive education, and compassionate care.
             </p>
 
-            {/* Contact */}
-            <div className="flex flex-col gap-2">
-              <a
-                href="mailto:info@renownedchildinitiative.org"
-                className="inline-flex items-center gap-2 font-['Jost'] text-sm text-white/60
-                           hover:text-[#6ab523] transition-colors duration-200 w-fit
-                           focus-visible:outline-none focus-visible:underline"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
-                  <path d="M1 5L7 8.5L13 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-                </svg>
-                info@renownedchildinitiative.org
-              </a>
-            </div>
+            {/* Contact email */}
+            <a
+              href="mailto:consulting@renownedchildinitiative.org"
+              className="inline-flex items-center gap-2 font-['Jost'] text-sm text-white/60
+                         hover:text-[#6ab523] transition-colors duration-200 w-fit
+                         focus-visible:outline-none focus-visible:underline"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
+                <path d="M1 5L7 8.5L13 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+              </svg>
+              consulting@renownedchildinitiative.org
+            </a>
+
+            {/* Social links — live from Sanity */}
+            {socialLinks?.length > 0 && (
+              <nav aria-label="Social media links" className="flex items-center gap-3 mt-1">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link._id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit our ${link.platform} page`}
+                    className="w-11 h-11 rounded-full border border-white/10
+                               flex items-center justify-center
+                               text-white/70 hover:text-[#6ab523]
+                               hover:border-[#6ab523]/40
+                               transition-all duration-200
+                               focus-visible:outline-none focus-visible:ring-2
+                               focus-visible:ring-[#6ab523]"
+                  >
+                    {SOCIAL_ICONS[link.platform] ?? link.platform}
+                  </a>
+                ))}
+              </nav>
+            )}
           </div>
 
           {/* Link columns */}
