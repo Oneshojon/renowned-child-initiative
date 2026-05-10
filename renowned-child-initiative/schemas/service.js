@@ -38,12 +38,25 @@ export default defineType({
       rows:  5,
     }),
 
-    defineField({
-      name:  "icon",
-      title: "Icon Name",
-      type:  "string",
-      description: "A keyword for the icon e.g. 'brain', 'family', 'school'",
-    }),
+   defineField({
+  name:  "icon",
+  title: "Icon",
+  type:  "string",
+  options: {
+    list: [
+      { title: "🧠 Neurodiversity",  value: "neurodiversity" },
+      { title: "⏱️ Intervention",    value: "intervention" },
+      { title: "🏫 School",          value: "school" },
+      { title: "👨‍👩‍👧 Family",           value: "family" },
+      { title: "💬 Speech",          value: "speech" },
+      { title: "📚 Training",        value: "training" },
+      { title: "🔵 Autism & ABA",    value: "autism" },
+      { title: "🧬 Brain / Psychoed", value: "brain" },
+    ],
+    layout: "radio",
+  },
+  description: "Select the icon that best represents this service",
+}),
 
     defineField({
       name:  "image",

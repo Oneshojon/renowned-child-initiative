@@ -1,6 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useSanity }   from "../hooks/useSanity";
+import { STATS_QUERY } from "../lib/queries";
 
 // ── Stagger container for child animations ────────────────────────
 const container = {
@@ -41,6 +43,35 @@ function StatPill({ number, label, delay = 0 }) {
   );
 }
 
+// ── Stats row — live from Sanity ──────────────────────────────────
+function StatsRow() {
+  const { data: stats, loading } = useSanity(STATS_QUERY);
+
+  // Fallback while loading
+  if (loading || !stats?.length) {
+    return (
+      <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
+        <StatPill number="500+" label="Children Supported" delay={0.8} />
+        <StatPill number="10+"  label="Years of Impact"    delay={0.9} />
+        <StatPill number="95%"  label="Family Satisfaction" delay={1.0} />
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
+      {stats.map((stat, i) => (
+        <StatPill
+          key={stat._id}
+          number={stat.number}
+          label={stat.label}
+          delay={0.8 + i * 0.1}
+        />
+      ))}
+    </motion.div>
+  );
+}
+
 // ── Floating card (overlays on the visual side) ───────────────────
 function FloatingCard({ className, children, delay = 0 }) {
   return (
@@ -57,8 +88,8 @@ function FloatingCard({ className, children, delay = 0 }) {
 }
 
 export default function Hero() {
-  const sectionRef  = useRef(null);
-  const isInView    = useInView(sectionRef, { once: true, margin: "-80px" });
+  const sectionRef = useRef(null);
+  const isInView   = useInView(sectionRef, { once: true, margin: "-80px" });
 
   // Subtle parallax on scroll
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
@@ -175,11 +206,13 @@ export default function Hero() {
                          bg-[#3a7d0a] hover:bg-[#6ab523] text-white
                          px-6 py-3.5 rounded-full transition-all duration-200
                          hover:shadow-lg hover:shadow-[#3a7d0a]/30 hover:-translate-y-0.5
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3a7d0a] focus-visible:ring-offset-2"
+                         focus-visible:outline-none focus-visible:ring-2
+                         focus-visible:ring-[#3a7d0a] focus-visible:ring-offset-2"
             >
               Get Support
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-                <path d="M2 7.5H13M9 3L13 7.5L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 7.5H13M9 3L13 7.5L9 12" stroke="currentColor" strokeWidth="1.6"
+                      strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
 
@@ -190,18 +223,15 @@ export default function Hero() {
                          hover:border-[#3a7d0a] hover:text-[#3a7d0a]
                          px-6 py-3.5 rounded-full transition-all duration-200
                          hover:-translate-y-0.5 hover:shadow-md
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3a7d0a] focus-visible:ring-offset-2"
+                         focus-visible:outline-none focus-visible:ring-2
+                         focus-visible:ring-[#3a7d0a] focus-visible:ring-offset-2"
             >
               Our Story
             </Link>
           </motion.div>
 
-          {/* Stats row */}
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
-            <StatPill number="500+" label="Children Supported" delay={0.8} />
-            <StatPill number="10+"  label="Years of Impact"    delay={0.9} />
-            <StatPill number="95%"  label="Family Satisfaction" delay={1.0} />
-          </motion.div>
+          {/* Stats row — live from Sanity */}
+          <StatsRow />
         </motion.div>
 
         {/* ── RIGHT — Visual ───────────────────────────────────── */}
@@ -237,13 +267,12 @@ export default function Hero() {
                 loading="eager"
                 decoding="async"
                 onError={(e) => {
-                  // Fallback placeholder if image not found
                   e.currentTarget.style.display = "none";
                   e.currentTarget.parentElement.classList.add("flex", "items-center", "justify-center");
                 }}
               />
 
-              {/* Overlay gradient at bottom for text legibility */}
+              {/* Overlay gradient at bottom */}
               <div
                 className="absolute inset-x-0 bottom-0 h-1/3
                            bg-gradient-to-t from-[#1a2e0a]/40 to-transparent"
@@ -252,11 +281,7 @@ export default function Hero() {
             </div>
 
             {/* ── Floating cards ────────────────────────────────── */}
-            {/* Top left — mission chip */}
-            <FloatingCard
-              className="-left-4 sm:-left-8 top-8"
-              delay={1.0}
-            >
+            <FloatingCard className="-left-4 sm:-left-8 top-8" delay={1.0}>
               <div className="flex items-center gap-2">
                 <span className="text-xl" role="img" aria-label="heart">💚</span>
                 <div>
@@ -266,11 +291,7 @@ export default function Hero() {
               </div>
             </FloatingCard>
 
-            {/* Bottom right — trust badge */}
-            <FloatingCard
-              className="-right-4 sm:-right-8 bottom-12"
-              delay={1.15}
-            >
+            <FloatingCard className="-right-4 sm:-right-8 bottom-12" delay={1.15}>
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-full bg-[#3a7d0a]/10 flex items-center justify-center flex-shrink-0">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
