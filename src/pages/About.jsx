@@ -415,6 +415,7 @@ function FounderSpotlight() {
                 "Cambridge English (L1 & L2)",
                 "Neurodiversity & Educational Consultant",
                 "Author — Every Child Can Shine",
+                "Author — The Neurodiverse Learner Support Toolkit",
               ].map((tag) => (
                 <span
                   key={tag}
@@ -425,6 +426,30 @@ function FounderSpotlight() {
                   {tag}
                 </span>
               ))}
+            </div>
+
+            {/* Books by the founder */}
+            <div className="pt-4 border-t border-[#3a7d0a]/10">
+              <p className="font-['Jost'] text-[#3a7d0a] text-xs uppercase tracking-widest mb-4">
+                Published Works
+              </p>
+              <div className="flex flex-col gap-3">
+                {[
+                  { title: "Every Child Can Shine", accent: "#3a7d0a" },
+                  { title: "The Neurodiverse Learner Support Toolkit", accent: "#e07b1a" },
+                ].map((book) => (
+                  <div key={book.title} className="flex items-center gap-3">
+                    <span
+                      className="flex-shrink-0 w-1 h-8 rounded-full"
+                      style={{ backgroundColor: book.accent }}
+                      aria-hidden="true"
+                    />
+                    <span className="font-['Cormorant_Garamond'] font-semibold text-[#1a2e0a] text-xl italic">
+                      {book.title}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
