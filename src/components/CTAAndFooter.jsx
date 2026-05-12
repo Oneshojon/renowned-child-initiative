@@ -15,17 +15,17 @@ export function CTABanner() {
     <section
       ref={ref}
       aria-labelledby="cta-heading"
-      className="relative bg-[#1a2e0a] overflow-hidden py-20 md:py-28"
+      className="relative bg-[#f7f9f4] overflow-hidden py-20 md:py-28"
     >
       {/* Organic blob */}
-      <div className="absolute -left-24 top-1/2 -translate-y-1/2 pointer-events-none opacity-20"
+      <div className="absolute -left-24 top-1/2 -translate-y-1/2 pointer-events-none opacity-10"
            aria-hidden="true">
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none">
           <path d="M200 20C300 20 380 100 380 200C380 300 300 380 200 380C100 380 20 300 20 200C20 100 100 20 200 20Z"
                 fill="#6ab523"/>
         </svg>
       </div>
-      <div className="absolute -right-16 -bottom-16 pointer-events-none opacity-15"
+      <div className="absolute -right-16 -bottom-16 pointer-events-none opacity-10"
            aria-hidden="true">
         <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
           <path d="M160 10C240 10 310 80 310 160C310 240 240 310 160 310C80 310 10 240 10 160C10 80 80 10 160 10Z"
@@ -38,7 +38,7 @@ export function CTABanner() {
         <svg width="100%" height="100%">
           <defs>
             <pattern id="cdots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1" fill="#f7f9f4"/>
+              <circle cx="1.5" cy="1.5" r="1" fill="#3a7d0a"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#cdots)"/>
@@ -53,24 +53,24 @@ export function CTABanner() {
           className="flex flex-col items-center gap-7"
         >
           <span className="inline-flex items-center gap-2 font-['Jost'] text-xs font-semibold
-                           uppercase tracking-widest text-[#6ab523]
-                           bg-[#6ab523]/10 border border-[#6ab523]/20
+                           uppercase tracking-widest text-[#3a7d0a]
+                           bg-[#3a7d0a]/10 border border-[#3a7d0a]/20
                            px-4 py-2 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#6ab523] animate-pulse" aria-hidden="true"/>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3a7d0a] animate-pulse" aria-hidden="true"/>
             Take the First Step
           </span>
 
           <h2
             id="cta-heading"
-            className="font-['Cormorant_Garamond'] font-semibold text-white
+            className="font-['Cormorant_Garamond'] font-semibold text-[#1a2e0a]
                        text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight"
           >
             Your child's journey
             <br/>
-            <span className="text-[#f5a84e]">starts with one call</span>
+            <span className="text-[#e07b1a]">starts with one call</span>
           </h2>
 
-          <p className="font-['Jost'] text-white/60 text-base sm:text-lg max-w-xl leading-relaxed">
+          <p className="font-['Jost'] text-[#1a2e0a]/60 text-base sm:text-lg max-w-xl leading-relaxed">
             Reach out today and let's talk about how we can support your child.
             No judgment — just compassion, expertise, and a genuine desire to help.
           </p>
@@ -79,13 +79,13 @@ export function CTABanner() {
             <Link
               to="/contact"
               className="inline-flex items-center gap-2.5
-                         font-['Jost'] font-semibold text-sm text-[#1a2e0a]
-                         bg-[#f5a84e] hover:bg-[#e07b1a] hover:text-white
+                         font-['Jost'] font-semibold text-sm text-white
+                         bg-[#1a2e0a] hover:bg-[#3a7d0a]
                          px-7 py-4 rounded-full transition-all duration-200
-                         hover:shadow-lg hover:shadow-[#e07b1a]/30 hover:-translate-y-0.5
+                         hover:shadow-lg hover:shadow-[#1a2e0a]/20 hover:-translate-y-0.5
                          focus-visible:outline-none focus-visible:ring-2
-                         focus-visible:ring-[#f5a84e] focus-visible:ring-offset-2
-                         focus-visible:ring-offset-[#1a2e0a]"
+                         focus-visible:ring-[#1a2e0a] focus-visible:ring-offset-2
+                         focus-visible:ring-offset-[#f7f9f4]"
             >
               Get in Touch
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
@@ -97,12 +97,12 @@ export function CTABanner() {
             <Link
               to="/services"
               className="inline-flex items-center gap-2
-                         font-['Jost'] font-medium text-sm text-white/80 hover:text-white
-                         border border-white/20 hover:border-white/50
+                         font-['Jost'] font-medium text-sm text-[#1a2e0a]/70 hover:text-[#1a2e0a]
+                         border border-[#1a2e0a]/20 hover:border-[#1a2e0a]/50
                          px-7 py-4 rounded-full transition-all duration-200
                          focus-visible:outline-none focus-visible:ring-2
-                         focus-visible:ring-white focus-visible:ring-offset-2
-                         focus-visible:ring-offset-[#1a2e0a]"
+                         focus-visible:ring-[#1a2e0a] focus-visible:ring-offset-2
+                         focus-visible:ring-offset-[#f7f9f4]"
             >
               Explore Services
             </Link>
@@ -124,6 +124,7 @@ const FOOTER_LINKS = [
       { label: "About",    to: "/about" },
       { label: "Services", to: "/services" },
       { label: "Contact",  to: "/contact" },
+      { label: "Donate",   to: "/donate" },
     ],
   },
   {
@@ -185,6 +186,30 @@ export function Footer() {
 
   return (
     <footer role="contentinfo" className="bg-[#111d06] text-white">
+
+      {/* Donation nudge strip */}
+      <div className="bg-[#f5a84e]/10 border-b border-[#f5a84e]/15">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-4
+                        flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="font-['Jost'] text-white/70 text-sm text-center sm:text-left">
+            <span className="text-[#f5a84e] font-semibold">Support our mission</span> — help us reach families who cannot afford our services.
+          </p>
+          <Link
+            to="/donate"
+            className="flex-shrink-0 inline-flex items-center gap-2
+                       font-['Jost'] font-semibold text-xs
+                       bg-[#f5a84e] text-[#1a2e0a] px-5 py-2.5 rounded-full
+                       hover:bg-white transition-colors duration-200
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-offset-2 focus-visible:outline-[#f5a84e]"
+          >
+            Donate Now
+            <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+              <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
+          </Link>
+        </div>
+      </div>
 
       {/* Main footer body */}
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-14 md:py-20">
@@ -273,11 +298,14 @@ export function Footer() {
                   <li key={label}>
                     <Link
                       to={to}
-                      className="font-['Jost'] text-sm text-white/55 hover:text-[#6ab523]
-                                 transition-colors duration-200
-                                 focus-visible:outline-none focus-visible:underline"
+                      className={`font-['Jost'] text-sm transition-colors duration-200
+                                 focus-visible:outline-none focus-visible:underline
+                                 ${label === "Donate"
+                                   ? "text-[#f5a84e] hover:text-white font-semibold"
+                                   : "text-white/55 hover:text-[#6ab523]"
+                                 }`}
                     >
-                      {label}
+                      {label === "Donate" ? "❤️ " : ""}{label}
                     </Link>
                   </li>
                 ))}

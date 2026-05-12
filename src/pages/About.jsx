@@ -75,6 +75,12 @@ const MILESTONES = [
   { year: "2024", event: "Surpassed 500 children supported across Lagos State." },
 ];
 
+// ── Books data ────────────────────────────────────────────────────
+const BOOKS = [
+  { title: "Every Child Can Shine",                    accent: "#3a7d0a", link: null },
+  { title: "The Neurodiverse Learner Support Toolkit", accent: "#e07b1a", link: "https://selar.com/1476qnk777" },
+];
+
 // ─────────────────────────────────────────────────────────────────
 // PAGE HERO
 // ─────────────────────────────────────────────────────────────────
@@ -434,19 +440,41 @@ function FounderSpotlight() {
                 Published Works
               </p>
               <div className="flex flex-col gap-3">
-                {[
-                  { title: "Every Child Can Shine", accent: "#3a7d0a" },
-                  { title: "The Neurodiverse Learner Support Toolkit", accent: "#e07b1a" },
-                ].map((book) => (
-                  <div key={book.title} className="flex items-center gap-3">
-                    <span
-                      className="flex-shrink-0 w-1 h-8 rounded-full"
-                      style={{ backgroundColor: book.accent }}
-                      aria-hidden="true"
-                    />
-                    <span className="font-['Cormorant_Garamond'] font-semibold text-[#1a2e0a] text-xl italic">
-                      {book.title}
-                    </span>
+                {BOOKS.map((book) => (
+                  <div key={book.title} className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="flex-shrink-0 w-1 h-8 rounded-full"
+                        style={{ backgroundColor: book.accent }}
+                        aria-hidden="true"
+                      />
+                      <span className="font-['Cormorant_Garamond'] font-semibold text-[#1a2e0a] text-xl italic">
+                        {book.title}
+                      </span>
+                    </div>
+                    {book.link && (
+                      <a
+                        href={book.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Get ${book.title} on Selar`}
+                        className="flex-shrink-0 font-['Jost'] font-semibold text-xs px-4 py-2 rounded-full
+                                   border-2 transition-all duration-200
+                                   hover:text-white focus-visible:outline focus-visible:outline-2
+                                   focus-visible:outline-offset-2"
+                        style={{ borderColor: book.accent, color: book.accent }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = book.accent;
+                          e.currentTarget.style.color = "#fff";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "transparent";
+                          e.currentTarget.style.color = book.accent;
+                        }}
+                      >
+                        Get book
+                      </a>
+                    )}
                   </div>
                 ))}
               </div>

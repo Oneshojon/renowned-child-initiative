@@ -5,6 +5,7 @@ import Home     from "./pages/Home";
 import About    from "./pages/About";
 import Services from "./pages/Services";
 import Contact  from "./pages/Contact";
+import DonationPage from "./pages/DonationPage";
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/about"    element={<About />}    />
           <Route path="/services" element={<Services />} />
           <Route path="/contact"  element={<Contact />}  />
+          <Route path="/donate" element={<DonationPage />} />
         </Routes>
       </main>
     </BrowserRouter>

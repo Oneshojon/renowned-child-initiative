@@ -5,13 +5,15 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 
 // ── Import all schemas ────────────────────────────────────────────
-import siteSettings  from "./schemas/siteSettings";
-import heroContent   from "./schemas/heroContent";
-import service       from "./schemas/service";
-import teamMember    from "./schemas/teamMember";
-import galleryImage  from "./schemas/galleryImage";
-import socialLink    from "./schemas/socialLink";
-import impactStat    from "./schemas/impactStat";
+import siteSettings     from "./schemas/siteSettings";
+import heroContent      from "./schemas/heroContent";
+import service          from "./schemas/service";
+import teamMember       from "./schemas/teamMember";
+import galleryImage     from "./schemas/galleryImage";
+import socialLink       from "./schemas/socialLink";
+import impactStat       from "./schemas/impactStat";
+import contactInfo      from "./schemas/contactInfo";
+import donationAccounts from "./schemas/donationAccounts";
 
 // ── Custom sidebar structure ──────────────────────────────────────
 const customStructure = (S) =>
@@ -36,6 +38,24 @@ const customStructure = (S) =>
           S.document()
             .schemaType("heroContent")
             .documentId("heroContent")
+        ),
+
+      S.listItem()
+        .title("📞  Contact Information")
+        .id("contactInfo")
+        .child(
+          S.document()
+            .schemaType("contactInfo")
+            .documentId("contactInfo")
+        ),
+
+      S.listItem()
+        .title("❤️  Donation Accounts")
+        .id("donationAccounts")
+        .child(
+          S.document()
+            .schemaType("donationAccounts")
+            .documentId("donationAccounts")
         ),
 
       S.divider(),
@@ -68,6 +88,8 @@ export default defineConfig({
       galleryImage,
       socialLink,
       impactStat,
+      contactInfo,
+      donationAccounts,
     ],
   },
 });

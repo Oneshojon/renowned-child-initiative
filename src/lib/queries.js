@@ -73,3 +73,24 @@ export const STATS_QUERY = `
     label
   }
 `;
+
+// ── Donation Accounts ─────────────────────────────────────────────
+export const DONATION_QUERY = `*[_type == "donationAccounts"][0]{
+  title,
+  note,
+  accounts[]{
+    bankName,
+    accountName,
+    accountNumber,
+    currency,
+    sortCode,
+    swiftCode
+  }
+}`;
+
+// ── Contact Information (singleton) ──────────────────────────────
+export const CONTACT_INFO_QUERY = `*[_type == "contactInfo"][0]{
+  phoneNumbers[]{ label, number },
+  whatsapp,
+  emails[]{ label, address }
+}`;

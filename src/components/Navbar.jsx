@@ -9,7 +9,8 @@ const NAV_LINKS = [
   { label: "Contact",  to: "/contact" },
 ];
 
-const DARK_HERO_ROUTES = ["/about", "/services", "/contact"];
+// Pages whose hero is dark — navbar gets frosted glass immediately (no transparent phase)
+const DARK_HERO_ROUTES = ["/about", "/services", "/contact", "/donate"];
 
 const menuVariants = {
   hidden:  { opacity: 0, y: -16, pointerEvents: "none" },
@@ -58,15 +59,8 @@ export default function Navbar() {
 
   const close = () => setMenuOpen(false);
 
-  // On dark hero pages before scroll: white text, subtle dark overlay behind nav
-  // On light hero (home) before scroll: dark text, transparent
-  // After scroll on any page: light frosted glass bg, dark text
-  const isLight = true; // navbar bg is always light when visible
+  const isLight = true;
 
-  // Background logic:
-  // - scrolled: frosted mint glass
-  // - dark hero, not scrolled: semi-transparent dark overlay so text is readable
-  // - light hero, not scrolled: fully transparent
   const headerBg = scrolled || isDarkHero
     ? "bg-[#f7f9f4]/95 backdrop-blur-md shadow-sm border-b border-[#3a7d0a]/10"
     : "bg-transparent";
@@ -155,23 +149,40 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* ── CTA Button ───────────────────────────────────────── */}
-        <Link
-          to="/contact"
-          className="hidden md:inline-flex items-center gap-2
-                     font-['Jost'] text-sm font-semibold text-white
-                     bg-[#3a7d0a] hover:bg-[#6ab523]
-                     px-5 py-2.5 rounded-full transition-all duration-200
-                     hover:shadow-md hover:shadow-[#3a7d0a]/30
-                     focus-visible:outline-none focus-visible:ring-2
-                     focus-visible:ring-[#6ab523] focus-visible:ring-offset-2"
-        >
-          Get Support
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor"
-                  strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </Link>
+        {/* ── Desktop right — Donate + Get Support ─────────────── */}
+        <div className="hidden md:flex items-center gap-2">
+          <NavLink
+            to="/donate"
+            className={({ isActive }) =>
+              `relative font-['Jost'] text-sm font-semibold px-4 py-2 rounded-full
+               transition-all duration-200
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5a84e]
+               ${isActive
+                 ? "text-[#e07b1a] bg-[#f5a84e]/15"
+                 : "text-[#e07b1a] hover:bg-[#f5a84e]/10"
+               }`
+            }
+          >
+            ❤️ Donate
+          </NavLink>
+
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2
+                       font-['Jost'] text-sm font-semibold text-white
+                       bg-[#3a7d0a] hover:bg-[#6ab523]
+                       px-5 py-2.5 rounded-full transition-all duration-200
+                       hover:shadow-md hover:shadow-[#3a7d0a]/30
+                       focus-visible:outline-none focus-visible:ring-2
+                       focus-visible:ring-[#6ab523] focus-visible:ring-offset-2"
+          >
+            Get Support
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor"
+                    strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </Link>
+        </div>
 
         {/* ── Hamburger (mobile) ────────────────────────────────── */}
         <button
@@ -257,7 +268,32 @@ export default function Navbar() {
                     </NavLink>
                   </motion.li>
                 ))}
+
+                {/* Donate link in mobile menu */}
+                <motion.li custom={NAV_LINKS.length} variants={linkVariants}
+                           initial="hidden" animate="visible">
+                  <NavLink
+                    to="/donate"
+                    onClick={close}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between font-['Jost'] text-base font-semibold
+                       px-4 py-3.5 rounded-xl transition-colors duration-150
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5a84e]
+                       ${isActive
+                         ? "bg-[#f5a84e]/20 text-[#e07b1a]"
+                         : "text-[#e07b1a] hover:bg-[#f5a84e]/10"
+                       }`
+                    }
+                  >
+                    ❤️ Donate
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M4 7H10M7 4L10 7L7 10" stroke="currentColor"
+                            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </NavLink>
+                </motion.li>
               </ul>
+
               <div className="p-3 pt-0">
                 <Link
                   to="/contact"
