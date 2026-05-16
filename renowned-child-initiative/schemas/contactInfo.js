@@ -10,7 +10,7 @@ export default defineType({
   type:  "document",
 
   // Prevent creating multiple documents of this type
-  __experimental_actions: ["update", "publish", "unpublish"],
+  __experimental_actions: ["update", "publish"],
 
   preview: {
     prepare: () => ({ title: "Contact Information" }),

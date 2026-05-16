@@ -5,7 +5,7 @@ export default {
   title: "Donation Accounts",
   type: "document",
   // Only one document of this type should exist
-  __experimental_actions: ["update", "publish", "unpublish"],
+  __experimental_actions: ["update", "publish"],
   fields: [
     {
       name: "title",
